@@ -10,61 +10,38 @@
 * docker, docker-compose
 * (Optional) WSLg
 
-
-## Getting started
-
+## Installation (WSL / Linux)
+### 1. Prerequisites (always)
 ```bash
-git clone {this-repository}
-cd {this-repository}
+sudo apt update && sudo apt install docker docker-compose
+git clone https://github.com/VictorIonescuRazvan/ros2-humble-gazebo-harmonic-docker.git
+cd ros2-humble-gazebo-harmonic-docker
+```
+### 2. (Option 1) Build the image locally
+This will take a few good minutes.
+```bash
 docker compose build
+```
+
+### (Option 2) Resolve submodules
+This can also take some time depending on your network connection
+```bash
+git submodule update --init --recursive
+docker load -i "ros2-humble-gazebo-harmonic-built-container/ros2-humble-gazebo-harmonic-docker-ros2.tar.gz"
+```
+
+### 3. Run
+```bash
 docker compose up -d
 docker compose exec ros2 bash
 ```
 
-* If your user id is not 1000, add `--build-arg user_id=$(id -u)` to `docker compose build` command.
+### 4. Connect later
+```bash
+docker compose exec ros2 bash
+```
 
-### ROS2
-
-From [Introducing turtlesim and rqt — ROS 2 Documentation: Galactic documentation](https://docs.ros.org/en/galactic/Tutorials/Turtlesim/Introducing-Turtlesim.html#start-turtlesim)
-
+## Test
 ```bash
 ros2 run turtlesim turtlesim_node
-```
-
-### Gazebo
-
-From [Testing Gazebo and ROS 2 integration | Gazebo : Tutorial](https://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros#TestingGazeboandROS2integration)
-
-
-```bash
-gazebo --verbose /opt/ros/galactic/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
-```
-
-Open another terminal
-
-```bash
-ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 1.0}, angular: {z: 1.0}}' -1
-```
-
-
-## Set up your workspace
-
-You may better to follow this steps to set up your workspace.
-[Creating a workspace — ROS 2 Documentation: Galactic documentation](https://docs.ros.org/en/galactic/Tutorials/Workspace/Creating-A-Workspace.html)
-
-
-## Other commands
-
-### docker-compose
-
-```bash
-docker compose stop
-```
-
-```bash
-docker compose down
-```
-
-```bash
-docker compose exec --user root ros2 bash
 ```
