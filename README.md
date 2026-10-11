@@ -1,10 +1,9 @@
-# Docker-ROS2
+# ROS2 Humble with Gazebo Harmonic, dockerised
 
 ## What is this?
 
-* A Docker container for ROS2 and Gazebo.
+* A Docker container for ROS2 Humble and Gazebo Harmonic.
 * GUI is enabled if WSLg is installed.
-
 
 ## Prerequisites
 
